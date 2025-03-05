@@ -1,0 +1,8 @@
+{
+    "greeting": "Bonjour",
+    "farewell": "Au revoir",
+    "user": {
+        "name": "Jean",
+        "age": "25"
+    }
+}

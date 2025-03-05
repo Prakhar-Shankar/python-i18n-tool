@@ -1,0 +1,9 @@
+{
+    "greeting": "Hello",
+    "farewell": "Goodbye",
+    "user": {
+        "name": "John",
+        "age": "25"
+    },
+    "messages": ["Welcome", "Goodbye"]
+}
