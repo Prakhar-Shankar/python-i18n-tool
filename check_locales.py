@@ -3,6 +3,7 @@ import os
 import json
 import re
 
+
 def find_files(directory, extensions):
     """Find all files with given extensions in the directory."""
     found_files = []
@@ -53,6 +54,28 @@ def extract_used_keys_from_python(file_path):
     
     return used_keys
 
+def extract_used_keys_from_js_ts(file_path):
+    """Extract i18n keys used in JavaScript/TypeScript files (e.g., t('hello'), this.$t('welcome'))"""
+    key_patterns = [
+        r't\(["\']([^"\']+)["\']\)',  # Matches t("key") or t('key')
+        r't\.\w+\(["\']([^"\']+)["\']\)',  # Matches t.namespace("key")
+        r't\(\{.*?["\']key["\']:\s*["\']([^"\']+)["\'].*?\}\)',  # Matches t({ key: "value" })
+        r'this.\$t\(["\']([^"\']+)["\']\)',  # Matches Vue's this.$t("key")
+    ]
+
+    used_keys = set()
+    
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:
+            content = f.read()
+            for pattern in key_patterns:
+                matches = re.findall(pattern, content)
+                used_keys.update(matches)
+    except Exception as e:
+        print(f"⚠️ Error reading {file_path}: {e}")
+
+    return used_keys
+
 def main():
     parser = argparse.ArgumentParser(description="i18n Key Management Tool")
     parser.add_argument("--scan", help="Path to the codebase to scan", required=True)
@@ -64,7 +87,7 @@ def main():
 
     print(f"📂 Scanning directory: {args.scan}")
 
-    # Find all JSON files
+    # Yaha se sare json files scan honge
     json_files = find_files(args.scan, ".json")
     all_json_keys = set()
 
@@ -75,9 +98,9 @@ def main():
             keys = extract_keys_from_json(file)
             all_json_keys.update(keys)
 
-    # Find all Python files
+    # Yaha se python files scan honge, but check_locales.py nhi hoga as we wanted 
     python_files = find_files(args.scan, ".py")
-    python_files = python_files = [file for file in python_files if os.path.basename(file) != "check_locales.py"]
+    python_files = [file for file in python_files if os.path.basename(file) != "check_locales.py"]
     used_keys = set()
 
     if python_files:
@@ -85,6 +108,16 @@ def main():
         for file in python_files:
             print(f"🔎 Checking: {file}")
             keys = extract_used_keys_from_python(file)
+            used_keys.update(keys)
+
+    # Yaha se Js and Ts scan ho jayege
+    js_ts_files = find_files(args.scan, (".js", ".ts"))
+
+    if js_ts_files:
+        print(f"\n📜 Scanning {len(js_ts_files)} JavaScript/TypeScript file(s) for used i18n keys:")
+        for file in js_ts_files:
+            print(f"🔎 Checking: {file}")
+            keys = extract_used_keys_from_js_ts(file)
             used_keys.update(keys)
 
     # Compare JSON keys and used keys
