@@ -1,0 +1,55 @@
+======================================================
+          i18n INTERNATIONALIZATION REPORT            
+======================================================
+
+🚨 MISSING KEYS (Used in Code but Not in JSON):
+------------------------------------------------------
+❌ Missing Key: Welcome
+   Used in:
+   - /home/prexy/python-i18n-tool/test_code/sample.js:5 -> console.log(t("Welcome"))
+
+❌ Missing Key: button.submit
+   Used in:
+   - /home/prexy/python-i18n-tool/test_code/sample.vue:8 -> <button>{{ $t('button.submit') }}</button>
+   - /home/prexy/python-i18n-tool/test_code/sample.vue:8 -> <button>{{ $t('button.submit') }}</button>
+
+❌ Missing Key: content.paragraph
+   Used in:
+   - /home/prexy/python-i18n-tool/test_code/sample.vue:7 -> <p>{{ $t('content.paragraph') }}</p>
+   - /home/prexy/python-i18n-tool/test_code/sample.vue:7 -> <p>{{ $t('content.paragraph') }}</p>
+
+❌ Missing Key: header.subtitle
+   Used in:
+   - /home/prexy/python-i18n-tool/test_code/sample.vue:4 -> <p>{{ $t('header.subtitle') }}</p>
+   - /home/prexy/python-i18n-tool/test_code/sample.vue:4 -> <p>{{ $t('header.subtitle') }}</p>
+
+❌ Missing Key: header.title
+   Used in:
+   - /home/prexy/python-i18n-tool/test_code/sample.vue:3 -> <h1>{{ $t('header.title') }}</h1>
+   - /home/prexy/python-i18n-tool/test_code/sample.vue:3 -> <h1>{{ $t('header.title') }}</h1>
+
+🗑️ UNUSED KEYS (Present in JSON but Not Used in Code):
+------------------------------------------------------
+⚠️ Unused Key: farewell
+   Defined in:
+   - /home/prexy/python-i18n-tool/locales/fr.json (fr)
+   - /home/prexy/python-i18n-tool/locales/qqq.json (unknown)
+   - /home/prexy/python-i18n-tool/locales/en.json (en)
+
+⚠️ Unused Key: messages
+   Defined in:
+   - /home/prexy/python-i18n-tool/locales/en.json (en)
+
+⚠️ Unused Key: messages[0]
+   Defined in:
+   - /home/prexy/python-i18n-tool/locales/qqq.json (unknown)
+
+⚠️ Unused Key: messages[1]
+   Defined in:
+   - /home/prexy/python-i18n-tool/locales/qqq.json (unknown)
+
+⚠️ Unused Key: user
+   Defined in:
+   - /home/prexy/python-i18n-tool/locales/fr.json (fr)
+   - /home/prexy/python-i18n-tool/locales/en.json (en)
+

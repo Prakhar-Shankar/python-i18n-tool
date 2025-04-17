@@ -1,0 +1,2 @@
+[console_scripts]
+i18n-checker = i18n_checker.cli:main

@@ -1,3 +1,34 @@
+Metadata-Version: 2.4
+Name: i18n-checker
+Version: 0.1.0
+Summary: A tool for detecting unused and missing localization keys across multiple programming languages and frameworks
+Home-page: https://github.com/yourusername/i18n-checker
+Author: i18n-checker Team
+Author-email: example@example.com
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Internationalization
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-python
+Dynamic: summary
+
 ## i18n Checker
 
 #### A powerful tool for detecting unused and missing localization keys across multiple languages and frameworks

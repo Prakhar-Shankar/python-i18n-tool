@@ -1,0 +1,13 @@
+LICENSE
+MANIFEST.in
+README.md
+requirements.txt
+setup.py
+i18n_checker/__init__.py
+i18n_checker/checker.py
+i18n_checker/cli.py
+i18n_checker.egg-info/PKG-INFO
+i18n_checker.egg-info/SOURCES.txt
+i18n_checker.egg-info/dependency_links.txt
+i18n_checker.egg-info/entry_points.txt
+i18n_checker.egg-info/top_level.txt

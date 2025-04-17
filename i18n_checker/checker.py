@@ -11,11 +11,8 @@ This script helps manage internationalization (i18n) keys by scanning a codebase
 4. Generate detailed reports about i18n key usage
 
 Supported file types:
-- Code: Python (.py), JavaScript (.js), TypeScript (.ts)
+- Code: Python (.py), JavaScript (.js), TypeScript (.ts), Vue (.vue)
 - Translations: JSON (.json)
-
-Usage:
-    python check_locales.py --scan <directory> [--fix] [--output <report_file>] [--format <txt|html>]
 """
 
 import argparse
@@ -488,29 +485,37 @@ def generate_html_report(missing_keys, unused_keys, used_keys, json_key_location
     
     return html_content
 
-def main():
+def run_checker(args=None):
     """
     Main function that coordinates the scanning and reporting process.
+    
+    Args:
+        args: Command line arguments (optional, for programmatic use)
+        
+    Returns:
+        dict: Results containing missing and unused keys
     """
-    parser = argparse.ArgumentParser(description="i18n Key Management Tool")
-    parser.add_argument("--scan", help="Path to the codebase to scan", required=True)
-    parser.add_argument("--fix", help="Generate suggestions to fix missing keys", action="store_true")
-    parser.add_argument("--output", help="Output file for detailed report (default: i18n_report.txt)")
-    parser.add_argument("--format", help="Output format: txt or html (default: txt)", choices=["txt", "html"], default="txt")
-    args = parser.parse_args()
+    if args is None:
+        parser = argparse.ArgumentParser(description="i18n Key Management Tool")
+        parser.add_argument("--scan", help="Path to the codebase to scan", required=True)
+        parser.add_argument("--fix", help="Generate suggestions to fix missing keys", action="store_true")
+        parser.add_argument("--output", help="Output file for detailed report (default: i18n_report.txt)")
+        parser.add_argument("--format", help="Output format: txt or html (default: txt)", choices=["txt", "html"], default="txt")
+        args = parser.parse_args()
 
+    scan_dir = args.scan
     output_file = args.output if args.output else f"i18n_report.{args.format}"
     fix_missing = args.fix
     output_format = args.format
 
-    if not os.path.exists(args.scan):
-        print(f"Error: Directory {args.scan} does not exist!")
-        return
+    if not os.path.exists(scan_dir):
+        print(f"Error: Directory {scan_dir} does not exist!")
+        return None
 
-    print(f"📂 Scanning directory: {args.scan}")
+    print(f"📂 Scanning directory: {scan_dir}")
 
     # Scan JSON files
-    json_files = find_files(args.scan, ".json")
+    json_files = find_files(scan_dir, ".json")
     all_json_keys = set()
     
     if json_files:
@@ -524,8 +529,8 @@ def main():
     json_key_locations = find_json_key_locations(json_files)
 
     # Scan Python files
-    python_files = find_files(args.scan, ".py")
-    python_files = [file for file in python_files if os.path.basename(file) != "check_locales.py"]
+    python_files = find_files(scan_dir, ".py")
+    python_files = [file for file in python_files if os.path.basename(file) != "check_locales.py" and "i18n_checker" not in file]
     
     used_keys = {}  # Dictionary mapping keys to where they're used
     
@@ -540,7 +545,7 @@ def main():
                 used_keys[key].extend(locations)
 
     # Scan JS/TS files
-    js_ts_files = find_files(args.scan, (".js", ".ts"))
+    js_ts_files = find_files(scan_dir, (".js", ".ts"))
 
     if js_ts_files:
         print(f"\n📜 Scanning {len(js_ts_files)} JavaScript/TypeScript file(s) for used i18n keys:")
@@ -553,7 +558,7 @@ def main():
                 used_keys[key].extend(locations)
     
     # Scan Vue files
-    vue_files = find_files(args.scan, ".vue")
+    vue_files = find_files(scan_dir, ".vue")
     
     if vue_files:
         print(f"\n🖼️ Scanning {len(vue_files)} Vue file(s) for used i18n keys:")
@@ -652,6 +657,10 @@ def main():
         print(" ✅ None!")
         
     print(f"\n📝 Detailed report written to: {output_file}")
-
-if __name__ == "__main__":
-    main()
+    
+    return {
+        "missing_keys": missing_keys,
+        "unused_keys": unused_keys,
+        "used_keys": used_keys,
+        "json_key_locations": json_key_locations
+    } 
