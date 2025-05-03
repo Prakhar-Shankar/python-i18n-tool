@@ -1,0 +1,24 @@
+{
+  "name": "demo-client-project",
+  "version": "1.0.0",
+  "description": "A demo project using i18n-checker",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "i18n-check": "i18n-checker --scan . --format html --output i18n_report.html",
+    "precommit": "npm run i18n-check"
+  },
+  "keywords": [
+    "i18n",
+    "internationalization",
+    "demo"
+  ],
+  "author": "Demo User",
+  "license": "MIT",
+  "dependencies": {
+    "i18n": "^0.15.1"
+  },
+  "devDependencies": {
+    "husky": "^8.0.3"
+  }
+} 

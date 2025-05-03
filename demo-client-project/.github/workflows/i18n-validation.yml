@@ -1,0 +1,52 @@
+name: i18n Validation
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  # Allow manual triggering
+  workflow_dispatch:
+
+jobs:
+  i18n-check:
+    runs-on: ubuntu-latest
+    name: Check for i18n issues
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        
+    - name: Install i18n-checker
+      run: |
+        python -m pip install --upgrade pip
+        pip install i18n-checker
+        
+    - name: Run i18n validation
+      run: |
+        i18n-checker --scan . --format html --output i18n_report.html
+        
+    - name: Check for critical i18n issues
+      id: check_issues
+      run: |
+        # Get the number of missing keys from the generated report
+        MISSING_KEYS=$(grep -o "Missing Keys.*" i18n_report.html | grep -o "[0-9]\+" || echo "0")
+        echo "Number of missing i18n keys: $MISSING_KEYS"
+        
+        # Fail the build if there are too many missing keys
+        if [ "$MISSING_KEYS" -gt "10" ]; then
+          echo "::error::Too many missing i18n keys: $MISSING_KEYS (threshold: 10)"
+          exit 1
+        else
+          echo "Missing keys within threshold: $MISSING_KEYS"
+        fi
+        
+    - name: Upload i18n report
+      uses: actions/upload-artifact@v3
+      with:
+        name: i18n-report
+        path: i18n_report.html 

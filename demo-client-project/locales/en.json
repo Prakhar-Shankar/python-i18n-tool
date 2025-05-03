@@ -1,0 +1,15 @@
+{
+  "welcome": {
+    "title": "Welcome to our application",
+    "message": "Thank you for using our service"
+  },
+  "user": {
+    "name": "Name",
+    "email": "Email address"
+  },
+  "buttons": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  }
+} 

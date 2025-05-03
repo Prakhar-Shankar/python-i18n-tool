@@ -52,7 +52,42 @@ python demo_cicd.py
 
 This simulation demonstrates how the i18n-checker would run in a real CI/CD environment, checking for missing or unused translation keys and generating detailed reports."
 
-## 6. Documentation and Integration
+## 6. Client Project Integration Demo
+
+"Now, let's see how a client project would integrate our i18n-checker into their own CI/CD pipeline."
+
+*[Show the demo-client-project directory structure]*
+
+"Here we have a sample project that uses our i18n-checker tool. Let's look at its structure:
+- A JavaScript application with i18n key usage
+- Translation files in JSON format
+- A GitHub Actions workflow for i18n validation
+- A package.json with i18n validation scripts"
+
+*[Run the client_project_demo.py script]*
+
+```bash
+python client_project_demo.py
+```
+
+"This demonstrates the typical workflow for a project using our tool:
+1. The project installs i18n-checker via pip in their CI/CD pipeline
+2. The tool scans their codebase for i18n key usage
+3. It compares used keys against their translation files
+4. It generates a detailed report highlighting issues
+5. The CI/CD pipeline can be configured to pass or fail based on thresholds
+6. Developers receive clear reports showing what needs to be fixed"
+
+*[Show the demo-client-project/.github/workflows/i18n-validation.yml file]*
+
+"This is a typical GitHub Actions workflow a client would use. It:
+- Installs our i18n-checker tool from PyPI
+- Runs the validation against their codebase
+- Sets configurable thresholds for missing keys
+- Uploads the report as a build artifact
+- Provides immediate feedback to developers"
+
+## 7. Documentation and Integration
 
 "We've also updated our documentation to help users integrate the i18n-checker into their own CI/CD pipelines."
 
@@ -63,7 +98,7 @@ This simulation demonstrates how the i18n-checker would run in a real CI/CD envi
 - Example code for other CI platforms like GitLab CI
 - Benefits of integrating i18n validation into the CI/CD process"
 
-## 7. Running Tests
+## 8. Running Tests
 
 "Our test suite ensures that all components of the tool work correctly."
 
@@ -73,7 +108,7 @@ This simulation demonstrates how the i18n-checker would run in a real CI/CD envi
 pytest tests/test_basic.py -v
 ```
 
-## 8. Benefits and Future Work
+## 9. Benefits and Future Work
 
 "The key benefits of our CI/CD integration include:
 - Early detection of i18n issues before they reach production
@@ -87,7 +122,7 @@ In the future, we plan to:
 - Implement automatic fixing of simple i18n issues
 - Integrate with translation management systems"
 
-## 9. Conclusion
+## 10. Conclusion
 
 "In conclusion, our i18n-checker tool with CI/CD integration provides a robust solution for managing internationalization in modern applications. It helps catch issues early in the development process, ensures high-quality translations, and integrates seamlessly into existing workflows."
 
