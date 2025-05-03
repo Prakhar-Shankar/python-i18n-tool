@@ -23,7 +23,7 @@ You can install the i18n-checker tool using pip:
 pip install i18n-checker
 
 # Install from the source code directory
-git clone https://github.com/yourusername/i18n-checker.git
+git clone https://github.com/Prakhar-Shankar/python-i18n-tool.git
 cd i18n-checker
 pip install -e .
 ```
@@ -85,6 +85,42 @@ The HTML report includes:
 - Language detection and display
 - File paths and line numbers where keys are used
 - Suggestions formatted in code blocks for easy copying
+
+## CI/CD Integration
+
+The i18n-checker includes built-in support for CI/CD pipelines, making it easy to automate internationalization validation as part of your development workflow:
+
+### GitHub Actions Integration
+
+A GitHub Actions workflow is provided in the `.github/workflows/ci_cd.yml` file, which:
+
+1. Runs automated tests on multiple Python versions (3.8, 3.9, 3.10)
+2. Performs code quality checks with flake8
+3. Builds and validates the package
+4. Can be configured to automatically publish releases to PyPI
+
+### Using in Your CI/CD Pipeline
+
+Add i18n validation to your existing CI/CD pipeline:
+
+```yaml
+# Example step for GitLab CI
+i18n-validation:
+  stage: test
+  script:
+    - pip install i18n-checker
+    - i18n-checker --scan ./src --format html --output i18n_report.html
+  artifacts:
+    paths:
+      - i18n_report.html
+```
+
+### Benefits of CI/CD Integration
+
+- **Catch i18n issues early**: Identify missing and unused keys before they reach production
+- **Automated Reports**: Generate reports automatically on each commit or pull request
+- **Quality Assurance**: Maintain high-quality translations across your application
+- **Workflow Integration**: Seamlessly fits into existing development workflows
 
 ## Supported File Types
 
