@@ -108,7 +108,7 @@ def simulate_cicd_pipeline():
     print(f"→ Found {total_missing} missing keys and {total_unused} unused keys")
     
     # Determine if this would pass or fail in a real CI pipeline
-    threshold = 10  # Increased threshold for demonstration purposes
+    threshold = 5  # Increased threshold for demonstration purposes
     if total_missing > threshold:
         print_with_color(f"  ✗ Too many missing keys (threshold: {threshold})", "red")
         status = "failed"

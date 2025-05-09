@@ -140,7 +140,8 @@ def extract_used_keys_from_python(file_path):
 
 def extract_used_keys_from_js_ts(file_path):
     """
-    Extract i18n keys used in JavaScript/TypeScript files.
+    Extract 
+      keys used in JavaScript/TypeScript files.
     
     Patterns detected:
     - t("key") or t('key')
@@ -663,4 +664,4 @@ def run_checker(args=None):
         "unused_keys": unused_keys,
         "used_keys": used_keys,
         "json_key_locations": json_key_locations
-    } 
+    }   
